@@ -9,11 +9,20 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-only-secret-key")
 
 DEBUG = os.getenv("DJANGO_DEBUG", "true").lower() == "true"
 
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-    if host.strip()
-]
+
+def split_env_list(value):
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+ALLOWED_HOSTS = []
+
+for host in split_env_list(os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")):
+    if host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(host)
+
+render_hostname = os.getenv("RENDER_EXTERNAL_HOSTNAME", "").strip()
+if render_hostname and render_hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_hostname)
 
 
 # Application definition
