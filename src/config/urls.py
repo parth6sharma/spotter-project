@@ -9,5 +9,9 @@ urlpatterns = [
     path("api/", include("trips.urls")),
     path("favicon.ico", FaviconView.as_view(), name="favicon"),
     path("", ProjectHomeView.as_view(), name="project-home"),
-    re_path(r"^(?!api/|admin/|health/|favicon\.ico$).*$", ProjectHomeView.as_view(), name="frontend-app"),
+    re_path(
+        r"^(?!api/|admin/|health/|favicon\.ico$).*$",
+        ProjectHomeView.as_view(),
+        name="frontend-app",
+    ),
 ]

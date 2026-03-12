@@ -1,7 +1,6 @@
-from importlib import import_module
 import sys
+from importlib import import_module
 from pathlib import Path
-
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 SRC_DIR = PROJECT_ROOT / "src"

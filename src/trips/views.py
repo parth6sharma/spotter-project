@@ -9,14 +9,18 @@ from rest_framework.views import APIView
 from .serializers import TripPlanRequestSerializer
 from .services import ExternalRoutingError, build_trip_plan
 
-
-FRONTEND_INDEX_FILE = Path(__file__).resolve().parents[2] / "web" / "dist" / "index.html"
+FRONTEND_INDEX_FILE = (
+    Path(__file__).resolve().parents[2] / "web" / "dist" / "index.html"
+)
 
 
 class ProjectHomeView(View):
     def get(self, request):
         if FRONTEND_INDEX_FILE.exists():
-            return HttpResponse(FRONTEND_INDEX_FILE.read_text(encoding="utf-8"), content_type="text/html; charset=utf-8")
+            return HttpResponse(
+                FRONTEND_INDEX_FILE.read_text(encoding="utf-8"),
+                content_type="text/html; charset=utf-8",
+            )
 
         return JsonResponse(
             {
