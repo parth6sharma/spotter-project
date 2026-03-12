@@ -1,3 +1,7 @@
+from pathlib import Path
+
+from django.http import HttpResponse, JsonResponse
+from django.views import View
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -6,12 +10,15 @@ from .serializers import TripPlanRequestSerializer
 from .services import ExternalRoutingError, build_trip_plan
 
 
-class ProjectHomeView(APIView):
-    authentication_classes = []
-    permission_classes = []
+FRONTEND_INDEX_FILE = Path(__file__).resolve().parents[2] / "web" / "dist" / "index.html"
 
+
+class ProjectHomeView(View):
     def get(self, request):
-        return Response(
+        if FRONTEND_INDEX_FILE.exists():
+            return HttpResponse(FRONTEND_INDEX_FILE.read_text(encoding="utf-8"), content_type="text/html; charset=utf-8")
+
+        return JsonResponse(
             {
                 "name": "Spotter Backend",
                 "status": "ok",
