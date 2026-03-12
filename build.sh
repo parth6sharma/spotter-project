@@ -6,6 +6,8 @@ ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WEB_DIR="$ROOT_DIR/web"
 PYTHON_BIN="$ROOT_DIR/.venv/bin/python"
 
+"$PYTHON_BIN" -m pip install -r "$ROOT_DIR/requirements.txt"
+
 cd "$WEB_DIR"
 
 if [[ -f package-lock.json ]]; then
