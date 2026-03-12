@@ -1,0 +1,9 @@
+asgiref==3.11.1
+click==8.3.1
+Django==6.0.3
+django-cors-headers==4.9.0
+djangorestframework==3.16.1
+h11==0.16.0
+sqlparse==0.5.5
+uvicorn==0.41.0
+whitenoise==6.12.0
