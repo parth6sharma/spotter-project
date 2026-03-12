@@ -53,7 +53,7 @@ class HealthCheckView(APIView):
     permission_classes = []
 
     def get(self, request):
-        return Response({"status": "ok"})
+        return Response({"status": "ok"}, status=status.HTTP_200_OK)
 
 
 class TripPlanView(APIView):
